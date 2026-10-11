@@ -1,0 +1,4 @@
+strategy,batches,records,total_batch_latency_s,mean_batch_latency_s,mean_escalation_rate,total_escalated_records,total_fail_closed_records,mean_character_recall,mean_character_leakage,mean_character_precision,mean_overmask_fraction,rho_last_batch
+Static-rho-fail-closed,2000,100000,602.3603,0.3012,0.3,30000,70000,0.8693,0.1307,0.9907,0.0037,0.3
+LAAPP,2000,100000,973.2158,0.4866,0.4984,49844,50156,0.833,0.167,0.984,0.006,0.5189
+LAAPP-no-fail-closed,2000,100000,970.665,0.4853,0.4893,48926,0,0.591,0.409,0.9784,0.0059,0.6692

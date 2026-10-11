@@ -1,0 +1,4 @@
+Strategy,Records,Deep calls,Escalation rate (%),Detection time (seconds),Average latency (ms),Throughput (records/second),Raw detection count
+Static-fast,500,0,0.0,0.0073,0.015,68294.26,1000
+Static-deep,500,500,100.0,6.4935,12.987,77.0,2521
+Adaptive,500,500,100.0,7.7234,15.447,64.74,3521

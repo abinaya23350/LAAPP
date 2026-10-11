@@ -1,0 +1,103 @@
+LAAPP
+Privacy-Aware Adaptive PII Detection and Anonymization Pipeline
+
+1. ABSTRACT
+LAAPP is a prototype for protecting personally identifiable information
+(PII) in structured datasets and free-text messages. It combines
+column-based masking for known sensitive fields with fast regular
+expression detection and deeper entity analysis using Presidio.
+An adaptive controller determines when to escalate selected messages
+to deeper analysis. The prototype is evaluated using processing time,
+latency, throughput, and escalation rate.
+
+2. PROBLEM STATEMENT
+Applying deep PII detection to every incoming message can increase
+processing cost and latency. Fast pattern matching is less expensive,
+but may miss names, locations, and other entities. LAAPP investigates
+how selective escalation can reduce unnecessary deep-analysis calls
+while preserving safeguards for known sensitive fields.
+
+3. OBJECTIVES
+- Identify and protect known PII fields in structured records.
+- Use regex for fast detection of email addresses and phone numbers.
+- Integrate Presidio for deeper text-entity analysis.
+- Explore adaptive escalation based on detected patterns.
+- Measure processing time, latency, throughput, and escalation rate.
+- Save experiment outputs for reproducibility.
+
+4. DATASET
+The prototype uses a CSV dataset with 100,000 rows and 12 columns:
+person_id, firstname, lastname, gender, age, street, streetnumber,
+address_unit, postalcode, city, phone, and email.
+The address_unit column contains 10,362 missing values.
+The source dataset is retained separately from the masked output.
+
+5. METHODOLOGY
+Step 1: Load and inspect the CSV dataset.
+Step 2: Identify nine known PII columns using the schema.
+Step 3: Mask non-empty values in these columns.
+Step 4: Preserve person_id, gender, and age in the baseline output.
+Step 5: Use regex to identify email and phone patterns in text.
+Step 6: Use Presidio for deeper entity analysis when escalated.
+Step 7: Compare detection strategies and record performance metrics.
+Step 8: Save CSV outputs, graphs, and experiment summaries to Drive.
+
+6. PRELIMINARY RESULTS
+Structured masking:
+- Records: 100,000
+- Known PII columns masked: 9
+- Non-empty PII values masked: 889,638
+- Masking coverage for these values: 100%
+- Original non-PII columns preserved: Yes
+- Initial masking runtime: 1.4785 seconds
+
+Validation:
+- Validation-loop throughput: 81,906.5 records/second.
+  This is validation throughput, not end-to-end masking throughput.
+
+Detection benchmark on 500 records:
+- Static-fast: 0 deep calls; average latency 0.015 ms.
+- Static-deep: 500 deep calls; average latency 12.987 ms.
+- Adaptive: 500 deep calls; average latency 15.447 ms.
+
+Separate six-message free-text test:
+- Escalated messages: 2 of 6
+- Escalation rate: 33.33%
+
+The 500-record benchmark and six-message test are separate experiments
+and should not be combined into one performance result.
+
+7. LIMITATIONS
+- Regex detection of email and phone patterns can miss names and locations.
+- The current adaptive controller does not yet prove a privacy-safety
+  constraint or equivalent privacy recall.
+- Presidio may generate false positives and false negatives.
+- Raw detection counts are not accuracy metrics.
+- A labelled test set is needed to measure precision, recall,
+  false negatives, and residual PII leakage.
+- The current prototype does not yet demonstrate a full Kafka/Spark
+  streaming deployment or production-scale streaming behaviour.
+- Timing results depend on the runtime environment and workload.
+
+8. CONCLUSION
+The prototype demonstrates structured-field masking, integration of
+regex and Presidio detection, adaptive escalation experiments, and
+automated evaluation artifact generation. Initial results confirm that
+known non-empty PII fields can be masked in the tested structured
+dataset. However, the current adaptive controller requires improved
+safeguards and labelled evaluation before privacy-safety claims can
+be made. Future work includes workload-aware routing, privacy-recall
+measurement, repeated performance trials, and streaming integration.
+
+9. ARTIFACTS
+person_100000.csv
+laapp_masked_100000.csv
+baseline_validation.csv
+detection_strategy_comparison.csv
+adaptive_free_text_test.csv
+laapp_evaluation_summary.csv
+evaluation_notes.txt
+latency_comparison.png
+escalation_comparison.png
+adaptive_message_test.png
+laapp_architecture.png

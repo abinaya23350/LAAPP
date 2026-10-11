@@ -1,0 +1,2 @@
+Records,PII columns,Non-empty PII values,Values masked,Masking coverage (%),Non-PII columns preserved,Validation time (seconds),Throughput (records/second)
+100000,9,889638,889638,100.0,True,1.2209,81906.5

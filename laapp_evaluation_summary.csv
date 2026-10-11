@@ -1,0 +1,7 @@
+Experiment,Dataset size,Metric,Value
+Structured masking baseline,100000,Masking coverage (%),100.0
+Structured masking baseline,100000,Validation throughput (records/second),81906.5
+Detection strategy comparison,500,Static-fast latency (ms),0.015
+Detection strategy comparison,500,Static-deep latency (ms),12.987
+Detection strategy comparison,500,Adaptive escalation rate (%),100.0
+Six-message free-text test,6,Escalation rate (%),33.33

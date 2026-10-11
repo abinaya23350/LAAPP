@@ -1,0 +1,22 @@
+LAAPP — Preliminary Evaluation Notes
+
+1. Structured masking:
+   100,000 records processed. All non-empty values in the nine
+   designated PII columns were masked in the tested output.
+   person_id, gender, and age were preserved.
+
+2. Detection strategy comparison:
+   Static-fast, Static-deep, and Adaptive were benchmarked on
+   500 records. The measured adaptive run escalated all 500 records,
+   so it did not reduce deep-analysis calls in this workload.
+
+3. Free-text controller sanity test:
+   Two of six messages were escalated (33.33%). This reduced
+   escalation but missed examples containing names and locations
+   without email or phone patterns.
+
+4. Limitations:
+   These are preliminary prototype results. Detection counts are
+   not ground-truth accuracy metrics. Privacy recall, false negatives,
+   and end-to-end streaming performance remain to be evaluated.
+   The six-message test is separate from the 500-record benchmark.

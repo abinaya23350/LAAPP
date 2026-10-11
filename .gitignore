@@ -1,0 +1,12 @@
+*.csv
+*.xlsx
+.env
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+!laapp_100k_aggregate_v2.csv
+!laapp_100k_batch_metrics_v2.csv
+!laapp_100k_batch_summary_v2.csv
+!laapp_evaluation_summary.csv
+!detection_strategy_comparison.csv
+!baseline_validation.csv

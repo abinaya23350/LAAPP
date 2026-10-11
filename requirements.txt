@@ -1,0 +1,6 @@
+pandas
+matplotlib
+streamlit
+presidio-analyzer
+presidio-anonymizer
+spacy
